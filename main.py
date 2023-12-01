@@ -1,8 +1,9 @@
-from textController import TextController
+from tkinkerController import *
 
 
 def main():
-    text_controller = TextController()
-    text_controller.controller()
+    app = TkinterController()
+    app.run()
+
 
 main()

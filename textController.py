@@ -7,15 +7,10 @@ class TextController:
         self.database = Database()
 
     def create_product(self):
-        usr_id = 0
-        h = int(input("ENTER PRODUCT ID: "))
-        while usr_id == 0:
-            for prod in self.database.list:
-                if h == prod.p_id:
-                    print(f"THERE IS ALREADY PRODUCT WITH ID: {h}")
-                    break
-            else:
-                usr_id = h
+        usr_id = int(input("ENTER PRODUCT ID: "))
+        if self.database.search_product(usr_id) is not None:
+            print("THERE IS ALREADY PRODUCT WITH ID: " + str(usr_id))
+        else:
             name = input("ENTER NAME: ")
             price = int(input("ENTER PRICE: "))
             n_units = int(input("ENTER NUMBER OF UNITS: "))
@@ -27,17 +22,16 @@ class TextController:
 
     def controller(self):
         h = 0
-        while h != 9:
+        while h != 8:
             h = int(input("""MENU:
 1. CREATE AND ADD PRODUCT
-2. DELETE DATABASE
+2. DELETE PRODUCT
 3. DISPLAY DATABASE
-4. DELETE PRODUCT
-5. CHANGE NUMBER OF UNITS
-6. SELL PRODUCT
-7. LOAD FILE
-8. SAVE FILE
-9. EXIT
+4. CHANGE NUMBER OF UNITS
+5. SELL PRODUCT
+6. LOAD FILE
+7. SAVE FILE
+8. EXIT
 """))
             match h:
                 case 1:
@@ -49,21 +43,17 @@ class TextController:
                     self.database.debug_display()
                 case 4:
                     prod_id = abs(int(input("ENTER PRODUCT ID: ")))
-                    self.database.delete_product(prod_id)
-                case 5:
-                    prod_id = abs(int(input("ENTER PRODUCT ID: ")))
                     new_units = int(input("ENTER NEW NUMBER OF UNITS: "))
                     self.database.change_n_units(prod_id, new_units)
-                case 6:
+                case 5:
                     prod_id = abs(int(input("ENTER PRODUCT ID: ")))
                     sell = int(input("ENTER HOW MANY YOU WANT TO SELL: "))
-                    self.database.change_n_units(prod_id, sell)
-                case 7:
+                    self.database.sell_units(prod_id, sell)
+                case 6:
                     file_path = input("ENTER PATH TO THE FILE YOU WANT TO LOAD: ")
                     self.database.load_file(file_path)
-                case 8:
+                case 7:
                     file_path = input("ENTER PATH TO THE FILE YOU WANT TO SAVE THE DATABASE: ")
                     self.database.save_file(file_path)
-                case 9:
+                case 8:
                     break
-

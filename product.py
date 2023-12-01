@@ -7,3 +7,6 @@ class Product:
 
     def change_units(self, n_units):
         self.n_units = n_units
+
+    def get_units(self):
+        return self.n_units

@@ -1,4 +1,5 @@
 ﻿from product import Product
+import os
 
 
 class Database:
@@ -38,6 +39,7 @@ class Database:
         if product is not None:
             index = self.list.index(product)
             new_units = product.n_units - how_many
+            print(new_units)
             if new_units >= 0:
                 product.change_units(new_units)
                 self.list[index] = product
@@ -57,6 +59,7 @@ class Database:
 
     def load_file(self, filepath):
         try:
+
             with open(filepath, "r") as file:
                 for line in file:
                     parts = line.strip().split('-')
@@ -69,6 +72,9 @@ class Database:
 
     def save_file(self, filepath):
         try:
+            if not os.path.exists(filepath):
+                parent_path = os.path.dirname(filepath)
+                os.makedirs(parent_path)
             with open(filepath, "w") as file:
                 for product in self.list:
                     file.write(f"{product.p_id}-{product.name}-{product.price}-{product.n_units}\n")
