@@ -1,4 +1,4 @@
-from tkinkerController import *
+from tkinterController import *
 
 
 def main():
