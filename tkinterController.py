@@ -13,6 +13,7 @@ class TkinterController:
         self.database = Database()
 
         self.flag = ''
+        self.flag_is = False
 
         self.button_add = Button(self.root, text="ADD PRODUCT", padx=40, pady=40, command=self.button_add, width=20)
         self.button_del = Button(self.root, text="DELETE PRODUCT", padx=40, pady=40, command=self.button_del, width=20)
@@ -188,63 +189,75 @@ class TkinterController:
             self.entry_filepath.grid_remove()
             self.button_submit.grid_remove()
 
+        self.flag_is = False
+
     def button_add(self):
-        self.id_label.grid(row=0, column=2)
-        self.entry_id.grid(row=0, column=3)
+        if self.flag_is is False:
+            self.id_label.grid(row=0, column=2)
+            self.entry_id.grid(row=0, column=3)
 
-        self.name_label.grid(row=1, column=2)
-        self.entry_name.grid(row=1, column=3)
+            self.name_label.grid(row=1, column=2)
+            self.entry_name.grid(row=1, column=3)
 
-        self.price_label.grid(row=2, column=2)
-        self.entry_price.grid(row=2, column=3)
+            self.price_label.grid(row=2, column=2)
+            self.entry_price.grid(row=2, column=3)
 
-        self.units_label.grid(row=3, column=2)
-        self.entry_units.grid(row=3, column=3)
+            self.units_label.grid(row=3, column=2)
+            self.entry_units.grid(row=3, column=3)
 
-        self.button_submit.grid(row=4, column=3)
-        self.flag = "ADD"
+            self.button_submit.grid(row=4, column=3)
+            self.flag = "ADD"
+            self.flag_is = True
 
     def button_del(self):
-
-        self.id_label.grid(row=0, column=2)
-        self.entry_id.grid(row=0, column=3)
-        self.button_submit.grid(row=1, column=3)
-        self.flag = "DEL"
+        if self.flag_is is False:
+            self.id_label.grid(row=0, column=2)
+            self.entry_id.grid(row=0, column=3)
+            self.button_submit.grid(row=1, column=3)
+            self.flag = "DEL"
+            self.flag_is = True
 
     def button_change(self):
+        if self.flag_is is False:
+            self.id_label.grid(row=0, column=2)
+            self.entry_id.grid(row=0, column=3)
 
-        self.id_label.grid(row=0, column=2)
-        self.entry_id.grid(row=0, column=3)
+            self.units_label.grid(row=1, column=2)
+            self.entry_units.grid(row=1, column=3)
 
-        self.units_label.grid(row=1, column=2)
-        self.entry_units.grid(row=1, column=3)
-
-        self.button_submit.grid(row=2, column=3)
-        self.flag = "CHANGE"
+            self.button_submit.grid(row=2, column=3)
+            self.flag = "CHANGE"
+            self.flag_is = True
 
     def button_sell(self):
-        self.id_label.grid(row=0, column=2)
-        self.entry_id.grid(row=0, column=3)
+        if self.flag_is is False:
+            self.id_label.grid(row=0, column=2)
+            self.entry_id.grid(row=0, column=3)
 
-        self.units_label.grid(row=1, column=2)
-        self.entry_units.grid(row=1, column=3)
+            self.units_label.grid(row=1, column=2)
+            self.entry_units.grid(row=1, column=3)
 
-        self.button_submit.grid(row=2, column=3)
-        self.flag = "SELL"
+            self.button_submit.grid(row=2, column=3)
+            self.flag = "SELL"
+            self.flag_is = True
 
     def button_loadfile(self):
-        self.filepath_label.grid(row=0, column=2)
-        self.entry_filepath.grid(row=0, column=3)
-        self.button_submit.grid(row=1, column=3)
+        if self.flag_is is False:
+            self.filepath_label.grid(row=0, column=2)
+            self.entry_filepath.grid(row=0, column=3)
+            self.button_submit.grid(row=1, column=3)
 
-        self.flag = "LOAD"
+            self.flag = "LOAD"
+            self.flag_is = True
 
     def button_savefile(self):
-        self.filepath_label.grid(row=0, column=2)
-        self.entry_filepath.grid(row=0, column=3)
-        self.button_submit.grid(row=1, column=3)
+        if self.flag_is is False:
+            self.filepath_label.grid(row=0, column=2)
+            self.entry_filepath.grid(row=0, column=3)
+            self.button_submit.grid(row=1, column=3)
 
-        self.flag = "SAVE"
+            self.flag = "SAVE"
+            self.flag_is = True
 
     def button_exit(self):
         self.root.quit()
