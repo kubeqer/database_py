@@ -1,4 +1,4 @@
-from tkinterController import *
+from controllers.tkinterController import *
 
 
 def main():
@@ -6,4 +6,5 @@ def main():
     app.run()
 
 
-main()
+if __name__ == "__main__":
+    main()

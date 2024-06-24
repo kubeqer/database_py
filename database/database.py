@@ -1,4 +1,4 @@
-﻿from product import Product
+﻿from models.product import Product
 import os
 
 
@@ -62,7 +62,7 @@ class Database:
 
             with open(filepath, "r") as file:
                 for line in file:
-                    parts = line.strip().split('-')
+                    parts = line.strip().split("-")
                     p_id, name, price, n_units = map(str.strip, parts)
                     self.add_product(Product(p_id, name, price, n_units))
         except FileNotFoundError:
@@ -77,6 +77,8 @@ class Database:
                 os.makedirs(parent_path)
             with open(filepath, "w") as file:
                 for product in self.list:
-                    file.write(f"{product.p_id}-{product.name}-{product.price}-{product.n_units}\n")
+                    file.write(
+                        f"{product.p_id}-{product.name}-{product.price}-{product.n_units}\n"
+                    )
         except Exception as e:
             print(f"UNEXPECTED ERROR: {e}")

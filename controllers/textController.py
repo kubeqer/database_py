@@ -1,5 +1,5 @@
-from product import Product
-from database import Database
+from models.product import Product
+from database.database import Database
 
 
 class TextController:
@@ -23,7 +23,9 @@ class TextController:
     def controller(self):
         h = 0
         while h != 8:
-            h = int(input("""MENU:
+            h = int(
+                input(
+                    """MENU:
 1. CREATE AND ADD PRODUCT
 2. DELETE PRODUCT
 3. DISPLAY DATABASE
@@ -32,7 +34,9 @@ class TextController:
 6. LOAD FILE
 7. SAVE FILE
 8. EXIT
-"""))
+"""
+                )
+            )
             match h:
                 case 1:
                     self.create_product()
@@ -53,7 +57,9 @@ class TextController:
                     file_path = input("ENTER PATH TO THE FILE YOU WANT TO LOAD: ")
                     self.database.load_file(file_path)
                 case 7:
-                    file_path = input("ENTER PATH TO THE FILE YOU WANT TO SAVE THE DATABASE: ")
+                    file_path = input(
+                        "ENTER PATH TO THE FILE YOU WANT TO SAVE THE DATABASE: "
+                    )
                     self.database.save_file(file_path)
                 case 8:
                     break
