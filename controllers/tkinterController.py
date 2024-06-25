@@ -1,11 +1,15 @@
 from tkinter import *
-from tkinter import ttk
 from tkinter import messagebox
+from tkinter import ttk
+
 from database.databaseSQLite import DatabaseSQLite, ProductModel
 
 
 class TkinterController:
+    """Controller class for handling product database operations via a Tkinter GUI."""
+
     def __init__(self):
+        """Initialize the TkinterController with a GUI and an instance of the DatabaseSQLite class."""
         self.root = Tk()
         self.root.title("Database")
         self.root.geometry("1920x1080")
@@ -105,6 +109,7 @@ class TkinterController:
         self.create_widgets()
 
     def create_widgets(self):
+        """Create and arrange the main buttons in the Tkinter window."""
         self.button_add.grid(row=0, column=0)
         self.button_del.grid(row=1, column=0)
         self.button_change.grid(row=2, column=0)
@@ -115,6 +120,7 @@ class TkinterController:
         self.button_exit.grid(row=7, column=0)
 
     def button_displaydata(self):
+        """Display all products in the database in the Treeview widget."""
         for item in self.tree.get_children():
             self.tree.delete(item)
 
@@ -124,6 +130,7 @@ class TkinterController:
             self.tree.insert("", "end", values=values)
 
     def button_submit(self):
+        """Handle the submission of form data based on the current operation flag."""
         if self.flag == "ADD":
             product_id = self.entry_id.get()
             name = self.entry_name.get()
@@ -240,6 +247,7 @@ class TkinterController:
         self.flag_is = False
 
     def button_add(self):
+        """Set up the form for adding a new product."""
         if self.flag_is is False:
             self.id_label.grid(row=0, column=2)
             self.entry_id.grid(row=0, column=3)
@@ -258,6 +266,7 @@ class TkinterController:
             self.flag_is = True
 
     def button_del(self):
+        """Set up the form for deleting a product."""
         if self.flag_is is False:
             self.id_label.grid(row=0, column=2)
             self.entry_id.grid(row=0, column=3)
@@ -266,6 +275,7 @@ class TkinterController:
             self.flag_is = True
 
     def button_change(self):
+        """Set up the form for changing the number of units of a product."""
         if self.flag_is is False:
             self.id_label.grid(row=0, column=2)
             self.entry_id.grid(row=0, column=3)
@@ -278,6 +288,7 @@ class TkinterController:
             self.flag_is = True
 
     def button_sell(self):
+        """Set up the form for selling units of a product."""
         if self.flag_is is False:
             self.id_label.grid(row=0, column=2)
             self.entry_id.grid(row=0, column=3)
@@ -290,6 +301,7 @@ class TkinterController:
             self.flag_is = True
 
     def button_loadfile(self):
+        """Set up the form for loading the database from a file."""
         if self.flag_is is False:
             self.filepath_label.grid(row=0, column=2)
             self.entry_filepath.grid(row=0, column=3)
@@ -299,6 +311,7 @@ class TkinterController:
             self.flag_is = True
 
     def button_savefile(self):
+        """Set up the form for saving the database to a file."""
         if self.flag_is is False:
             self.filepath_label.grid(row=0, column=2)
             self.entry_filepath.grid(row=0, column=3)
@@ -308,7 +321,9 @@ class TkinterController:
             self.flag_is = True
 
     def button_exit(self):
+        """Close the application."""
         self.root.quit()
 
     def run(self):
+        """Run the Tkinter main loop to start the application."""
         self.root.mainloop()

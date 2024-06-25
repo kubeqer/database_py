@@ -1,12 +1,20 @@
-from models.product import Product
 from database.database import Database
+from models.product import Product
 
 
 class TextController:
+    """Controller class for handling product database operations via CLI."""
+
     def __init__(self):
+        """Initialize the TextController with an instance of the Database class."""
         self.database = Database()
 
     def create_product(self):
+        """Create and add a new product to the database.
+
+        Prompts the user for product details such as ID, name, price, and number of units.
+        If a product with the entered ID already exists, an error message is displayed.
+        """
         usr_id = int(input("ENTER PRODUCT ID: "))
         if self.database.search_product(usr_id) is not None:
             print("THERE IS ALREADY PRODUCT WITH ID: " + str(usr_id))
@@ -18,9 +26,20 @@ class TextController:
             self.database.add_product(product)
 
     def display_database(self):
+        """Display all products in the database.
+
+        This method calls the debug_display method of the Database class to print
+        the details of all products.
+        """
         self.database.debug_display()
 
     def controller(self):
+        """Run the command-line interface for managing the product database.
+
+        Displays a menu with options to create, delete, display, update, and sell products,
+        as well as to load and save the database from/to a file. The loop continues until
+        the user selects the exit option.
+        """
         h = 0
         while h != 8:
             h = int(
